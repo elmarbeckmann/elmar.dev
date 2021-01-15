@@ -1,8 +1,6 @@
 # Elmardotdev
 
-This project was generated using [Nx](https://nx.dev).
-
-<p align="center"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
+My personal website. If you need it, fork it. I'm using NX. See below.
 
 🔎 **Nx is a set of Extensible Dev Tools for Monorepos.**
 
