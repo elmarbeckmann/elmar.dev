@@ -1,8 +1,4 @@
 {
-  "npmScope": "elmardotdev",
-  "affected": {
-    "defaultBase": "master"
-  },
   "implicitDependencies": {
     "angular.json": "*",
     "package.json": {
@@ -14,14 +10,6 @@
     ".eslintrc.json": "*",
     "nx.json": "*"
   },
-  "tasksRunnerOptions": {
-    "default": {
-      "runner": "@nrwl/workspace/tasks-runners/default",
-      "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"]
-      }
-    }
-  },
   "projects": {
     "elmardotdev": {
       "tags": []
@@ -30,5 +18,21 @@
       "tags": [],
       "implicitDependencies": ["elmardotdev"]
     }
-  }
+  },
+  "targetDefaults": {
+    "build": {
+      "cache": true
+    },
+    "lint": {
+      "cache": true
+    },
+    "test": {
+      "cache": true
+    },
+    "e2e": {
+      "cache": true
+    }
+  },
+  "useInferencePlugins": false,
+  "defaultBase": "master"
 }
