@@ -13,7 +13,7 @@
             "outputPath": "dist/apps/elmardotdev",
             "index": "apps/elmardotdev/src/index.html",
             "main": "apps/elmardotdev/src/main.ts",
-            "polyfills": "apps/elmardotdev/src/polyfills.ts",
+            "polyfills": ["zone.js"],
             "tsConfig": "apps/elmardotdev/tsconfig.app.json",
             "aot": true,
             "assets": [
@@ -56,11 +56,11 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "elmardotdev:build"
+            "buildTarget": "elmardotdev:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "elmardotdev:build:production"
+              "buildTarget": "elmardotdev:build:production"
             }
           }
         },
@@ -141,6 +141,5 @@
     "@nrwl/angular:component": {
       "style": "scss"
     }
-  },
-  "defaultProject": "elmardotdev"
+  }
 }
