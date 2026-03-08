@@ -18,7 +18,9 @@
             "aot": true,
             "assets": [
               "apps/elmardotdev/src/favicon.ico",
-              "apps/elmardotdev/src/assets"
+              "apps/elmardotdev/src/assets",
+              "apps/elmardotdev/src/robots.txt",
+              "apps/elmardotdev/src/sitemap.xml"
             ],
             "styles": ["apps/elmardotdev/src/styles.scss"],
             "scripts": []

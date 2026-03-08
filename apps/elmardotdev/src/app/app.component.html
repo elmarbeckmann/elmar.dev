@@ -1,42 +1,56 @@
 <div class="page-wrapper" [ngClass]="'theme-' + currentTheme">
-  <div class="style-picker-wrapper">
+  <nav class="style-picker-wrapper" aria-label="Theme selector">
     <div
       class="style-picker"
       [class.open]="dropdownOpen"
       (click)="toggleDropdown()"
+      role="button"
+      aria-haspopup="listbox"
+      [attr.aria-expanded]="dropdownOpen"
+      tabindex="0"
+      (keydown.enter)="toggleDropdown()"
+      (keydown.space)="toggleDropdown(); $event.preventDefault()"
     >
-      Choose your style <span class="arrow">&#9660;</span>
+      Choose your style <span class="arrow" aria-hidden="true">&#9660;</span>
     </div>
-    <div class="style-dropdown" [class.open]="dropdownOpen">
+    <div
+      class="style-dropdown"
+      [class.open]="dropdownOpen"
+      role="listbox"
+      aria-label="Theme options"
+    >
       @for (t of themes; track t.key) {
         <button
           class="style-option"
           [class.active]="currentTheme === t.key"
           (click)="setTheme(t.key)"
+          role="option"
+          [attr.aria-selected]="currentTheme === t.key"
         >
           <span class="option-title">{{ t.label }}</span>
           <span class="option-desc">{{ t.description }}</span>
         </button>
       }
     </div>
-  </div>
+  </nav>
 
-  <div class="container">
+  <main class="container">
     <div class="row justify-content-center">
       <div class="col-md-10">
-        <div class="title text-center">
+        <header class="title text-center">
           <h1>Elmar Beckmann</h1>
-          <h4 class="subtitle">Lead frontend developer / architect</h4>
-        </div>
+          <p class="subtitle">Lead frontend developer / architect</p>
+        </header>
 
-        <div class="content-card">
-          <h4>Summary</h4>
+        <section class="content-card" aria-labelledby="section-summary">
+          <h2 id="section-summary">Summary</h2>
           <div class="summary">
             <p>
               Lead Frontend Developer and consultant working from
               <a
                 href="https://psgtechnauts.nl"
                 target="_blank"
+                rel="noopener noreferrer"
                 title="PSG Technauts"
                 >PSG Technauts</a
               >, focused on building scalable, high-quality web platforms for
@@ -52,10 +66,10 @@
               systems, performance strategy, and long-term maintainability.
             </p>
           </div>
-        </div>
+        </section>
 
-        <div class="content-card">
-          <h4>Specialties</h4>
+        <section class="content-card" aria-labelledby="section-specialties">
+          <h2 id="section-specialties">Specialties</h2>
           <div class="specialties">
             <div class="row">
               <div class="col-md-4 col-sm-4">
@@ -81,24 +95,32 @@
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
-        <div class="content-card">
-          <h4>Contact</h4>
+        <section class="content-card" aria-labelledby="section-contact">
+          <h2 id="section-contact">Contact</h2>
           <div class="contact">
             <p>
               Mail me at
               <a href="mailto:hello@elmar.dev">hello@elmar.dev</a>, look me up
               on
-              <a href="https://www.linkedin.com/in/elmarbeckmann/">LinkedIn</a>
+              <a
+                href="https://www.linkedin.com/in/elmarbeckmann/"
+                target="_blank"
+                rel="noopener noreferrer"
+                >LinkedIn</a
+              >
               and reach out on
-              <a href="https://twitter.com/elmardotdev">Twitter.</a>
+              <a
+                href="https://twitter.com/elmardotdev"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Twitter.</a
+              >
             </p>
           </div>
-        </div>
-
-        <br />
+        </section>
       </div>
     </div>
-  </div>
+  </main>
 </div>

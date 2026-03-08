@@ -244,7 +244,7 @@
     }
   }
 
-  h4 {
+  h2 {
     font-family: 'Kalam', sans-serif;
     font-weight: 100;
     margin-bottom: 20px;
@@ -252,7 +252,7 @@
   }
 
   .title {
-    h4 {
+    h2 {
       animation: text-scramble 8s infinite, rainbow-text 4s linear infinite;
     }
   }
@@ -453,19 +453,19 @@
   }
 
   // === SECTION HEADINGS: EACH ONE DIFFERENT ===
-  .content-card:nth-child(1) h4 {
+  .content-card:nth-child(1) h2 {
     color: $hot-pink;
     text-shadow: 0 0 20px rgba($hot-pink, 0.4), 4px 4px 0 rgba($orange, 0.2);
     text-transform: uppercase;
     letter-spacing: 0.3rem;
   }
-  .content-card:nth-child(2) h4 {
+  .content-card:nth-child(2) h2 {
     color: $lime;
     text-shadow: 0 0 20px rgba($lime, 0.4), -3px 3px 0 rgba($cyan, 0.2);
     font-style: italic;
     transform: rotate(-2deg);
   }
-  .content-card:nth-child(3) h4 {
+  .content-card:nth-child(3) h2 {
     color: $orange;
     text-shadow: 0 0 20px rgba($orange, 0.4), 2px -2px 0 rgba($yellow, 0.3);
     text-decoration: line-through;
