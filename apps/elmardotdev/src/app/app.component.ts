@@ -1,7 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 import { NgClass } from '@angular/common';
 
-type Theme = 'original' | 'neumorphism' | 'brutalism' | 'maximalism';
+type Theme = 'original' | 'neumorphism' | 'brutalism' | 'maximalism' | 'chaos';
 
 interface ThemeOption {
   key: Theme;
@@ -25,6 +25,7 @@ export class AppComponent {
     { key: 'neumorphism', label: 'Soft Touch', description: 'Pillowy shadows, gentle vibes' },
     { key: 'brutalism', label: 'I Am The Brute', description: 'Raw, bold, unapologetic' },
     { key: 'maximalism', label: 'More Is More', description: 'Neon dreams, maximum impact' },
+    { key: 'chaos', label: 'Fever Dream', description: 'Your screen called. It wants therapy.' },
   ];
 
   currentTheme: Theme;

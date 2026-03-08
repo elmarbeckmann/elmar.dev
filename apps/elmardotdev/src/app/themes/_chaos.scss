@@ -1,0 +1,534 @@
+// ──────────────────────────────────────
+// THEME: Chaos — anti-design fever dream
+// Rules? We don't do that here.
+// ──────────────────────────────────────
+
+// === THE MADNESS ENGINE ===
+
+@keyframes chaos-bg {
+  0% { background-position: 0% 0%; filter: hue-rotate(0deg); }
+  25% { background-position: 100% 100%; }
+  50% { background-position: 50% 0%; filter: hue-rotate(90deg); }
+  75% { background-position: 0% 100%; }
+  100% { background-position: 0% 0%; filter: hue-rotate(0deg); }
+}
+
+@keyframes glitch-hard {
+  0%, 82% {
+    transform: none;
+    text-shadow: none;
+    opacity: 1;
+  }
+  83% {
+    transform: skew(-12deg, 2deg) translateX(-8px);
+    text-shadow: -6px 0 #ff00de, 6px 0 #00fff7, 0 4px #ff6b00;
+    opacity: 0.8;
+  }
+  85% {
+    transform: skew(8deg, -3deg) translateX(12px) scaleY(1.1);
+    text-shadow: 4px 0 #00ff88, -8px 0 #ff00de;
+    clip-path: inset(20% 0 30% 0);
+  }
+  86% {
+    transform: skew(-3deg) translateX(-4px) scaleX(1.05);
+    text-shadow: -3px 3px #ff6b00, 5px -2px #00fff7;
+    clip-path: inset(50% 0 10% 0);
+    opacity: 0.6;
+  }
+  88% {
+    transform: skew(15deg, -1deg) translateY(-6px);
+    text-shadow: 0 -4px #ff00de, 0 4px #00fff7;
+    clip-path: inset(10% 0 60% 0);
+  }
+  89% {
+    transform: none;
+    text-shadow: -2px 0 #ff00de, 2px 0 #00fff7;
+    clip-path: none;
+    opacity: 1;
+  }
+  95% {
+    transform: translateX(3px) skew(-2deg);
+    text-shadow: 3px 0 #00ff88, -3px 0 #ff6b00;
+  }
+  96% {
+    transform: none;
+    text-shadow: none;
+  }
+}
+
+@keyframes card-drunk {
+  0% { transform: rotate(-2.5deg) translateY(0) translateX(0); }
+  15% { transform: rotate(1.8deg) translateY(-8px) translateX(6px); }
+  30% { transform: rotate(-1deg) translateY(4px) translateX(-10px) skew(-1deg); }
+  45% { transform: rotate(3deg) translateY(-12px) translateX(3px); }
+  60% { transform: rotate(-1.5deg) translateY(6px) translateX(-5px) skew(0.5deg); }
+  75% { transform: rotate(2deg) translateY(-4px) translateX(8px); }
+  100% { transform: rotate(-2.5deg) translateY(0) translateX(0); }
+}
+
+@keyframes color-vomit {
+  0% { border-color: #ff00de; box-shadow: 0 0 20px rgba(#ff00de, 0.3); }
+  20% { border-color: #00fff7; box-shadow: 0 0 30px rgba(#00fff7, 0.3); }
+  40% { border-color: #ff6b00; box-shadow: 0 0 25px rgba(#ff6b00, 0.3); }
+  60% { border-color: #00ff88; box-shadow: 0 0 35px rgba(#00ff88, 0.3); }
+  80% { border-color: #ffe600; box-shadow: 0 0 20px rgba(#ffe600, 0.3); }
+  100% { border-color: #ff00de; box-shadow: 0 0 20px rgba(#ff00de, 0.3); }
+}
+
+@keyframes spin-slow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes anti-spin {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(-180deg) scale(1.5); }
+  100% { transform: rotate(-360deg) scale(1); }
+}
+
+@keyframes text-scramble {
+  0%, 90%, 100% { letter-spacing: 0.25rem; }
+  92% { letter-spacing: 1.2rem; opacity: 0.7; }
+  94% { letter-spacing: -0.1rem; opacity: 0.5; }
+  96% { letter-spacing: 0.6rem; opacity: 0.9; }
+}
+
+@keyframes melt {
+  0%, 85%, 100% { transform: scaleY(1) translateY(0); filter: blur(0); }
+  90% { transform: scaleY(1.15) translateY(3px); filter: blur(1px); }
+  95% { transform: scaleY(0.95) translateY(-2px); filter: blur(0.5px); }
+}
+
+@keyframes pill-chaos {
+  0% { transform: rotate(0deg) translateX(0); }
+  20% { transform: rotate(-3deg) translateX(8px); }
+  40% { transform: rotate(2deg) translateX(-6px) scale(1.04); }
+  60% { transform: rotate(-1deg) translateX(4px) skew(-2deg); }
+  80% { transform: rotate(1.5deg) translateX(-3px); }
+  100% { transform: rotate(0deg) translateX(0); }
+}
+
+@keyframes scanner {
+  0% { top: 0; opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { top: 100%; opacity: 1; }
+}
+
+@keyframes flicker {
+  0%, 95%, 100% { opacity: 1; }
+  96% { opacity: 0.2; }
+  97% { opacity: 0.9; }
+  98% { opacity: 0.3; }
+  99% { opacity: 0.8; }
+}
+
+@keyframes cursor-blink {
+  0%, 49% { border-right-color: #ff00de; }
+  50%, 100% { border-right-color: transparent; }
+}
+
+@keyframes rainbow-text {
+  0% { color: #ff00de; }
+  20% { color: #ff6b00; }
+  40% { color: #ffe600; }
+  60% { color: #00ff88; }
+  80% { color: #00fff7; }
+  100% { color: #ff00de; }
+}
+
+@keyframes shake-violent {
+  0%, 100% { transform: translateX(0); }
+  10% { transform: translateX(-8px) rotate(-2deg); }
+  20% { transform: translateX(6px) rotate(1deg); }
+  30% { transform: translateX(-4px) rotate(-1deg); }
+  40% { transform: translateX(8px) rotate(2deg); }
+  50% { transform: translateX(-6px); }
+  60% { transform: translateX(4px) rotate(-1deg); }
+  70% { transform: translateX(-8px) rotate(1deg); }
+  80% { transform: translateX(6px); }
+  90% { transform: translateX(-4px) rotate(-2deg); }
+}
+
+.theme-chaos {
+  $hot-pink: #ff00de;
+  $cyan: #00fff7;
+  $lime: #00ff88;
+  $orange: #ff6b00;
+  $yellow: #ffe600;
+  $text: #f0f0f0;
+  $text-l: #d0d0d0;
+
+  // === THE BACKGROUND IS ALIVE ===
+  background:
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 80px,
+      rgba($hot-pink, 0.015) 80px,
+      rgba($hot-pink, 0.015) 82px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 120px,
+      rgba($cyan, 0.01) 120px,
+      rgba($cyan, 0.01) 122px
+    ),
+    linear-gradient(
+      270deg,
+      #0d0221, #150535, #0a1628, #1a0a2e, #0d0221
+    );
+  background-size: 100% 100%, 100% 100%, 800% 800%;
+  animation: chaos-bg 25s ease infinite;
+  color: $text;
+  overflow: hidden;
+  position: relative;
+
+  // === SCAN LINE OVERLAY ===
+  &::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, $cyan, $hot-pink, transparent);
+    animation: scanner 4s linear infinite;
+    z-index: 50;
+    pointer-events: none;
+    opacity: 0.6;
+  }
+
+  // === CRT NOISE OVERLAY ===
+  &::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.08) 0px,
+        rgba(0, 0, 0, 0.08) 1px,
+        transparent 1px,
+        transparent 3px
+      );
+    pointer-events: none;
+    z-index: 49;
+  }
+
+  // === HEADINGS ARE HAVING A BREAKDOWN ===
+  h1 {
+    font-weight: 900;
+    font-size: 4rem;
+    letter-spacing: 0.15rem;
+    animation: glitch-hard 3s infinite, flicker 8s infinite;
+    color: #fff;
+    text-shadow:
+      0 0 10px $hot-pink,
+      0 0 40px rgba($hot-pink, 0.5),
+      0 0 80px rgba($cyan, 0.3),
+      4px 4px 0 $orange,
+      -4px -4px 0 $cyan;
+    text-transform: uppercase;
+    position: relative;
+
+    &::after {
+      content: 'Elmar Beckmann';
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      color: transparent;
+      text-shadow: -3px -3px 0 rgba($hot-pink, 0.5);
+      z-index: -1;
+      animation: glitch-hard 3s infinite reverse;
+    }
+  }
+
+  h4 {
+    font-family: 'Kalam', sans-serif;
+    font-weight: 100;
+    margin-bottom: 20px;
+    animation: melt 12s ease-in-out infinite, rainbow-text 6s linear infinite;
+  }
+
+  .title {
+    h4 {
+      animation: text-scramble 8s infinite, rainbow-text 4s linear infinite;
+    }
+  }
+
+  .subtitle {
+    font-family: 'Roboto Slab', sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.25rem;
+    text-transform: uppercase;
+    border-right: 3px solid $hot-pink;
+    padding-right: 8px;
+    animation: cursor-blink 0.8s step-end infinite, text-scramble 10s infinite;
+  }
+
+  // === LINKS THAT FIGHT BACK ===
+  a {
+    color: $hot-pink;
+    font-weight: 700;
+    text-decoration: none;
+    position: relative;
+    text-shadow: 0 0 6px rgba($hot-pink, 0.4);
+    display: inline-block;
+    transition: all 0.1s;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, $hot-pink, $cyan, $lime, $orange, $hot-pink);
+      background-size: 200% 100%;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      animation: chaos-bg 2s linear infinite;
+    }
+
+    &:hover {
+      color: $yellow;
+      text-shadow:
+        0 0 15px rgba($yellow, 0.6),
+        0 0 30px rgba($hot-pink, 0.3);
+      text-decoration: none;
+      animation: shake-violent 0.3s ease;
+      transform: scale(1.1);
+
+      &::after {
+        transform: scaleX(1);
+        transform-origin: left;
+      }
+    }
+  }
+
+  // === CARDS: DRUNK, DISORDERLY, BEAUTIFUL ===
+  .content-card {
+    background: rgba(#fff, 0.02);
+    border: 2px solid rgba($hot-pink, 0.3);
+    position: relative;
+    animation: card-drunk 12s ease-in-out infinite, color-vomit 8s linear infinite;
+    backdrop-filter: blur(3px);
+    overflow: visible;
+
+    // Deliberately wrong, asymmetric, ugly-beautiful
+    &:nth-child(1) {
+      border-radius: 0 40px 0 40px;
+      animation-delay: 0s, 0s;
+      border-width: 2px 4px 2px 4px;
+    }
+    &:nth-child(2) {
+      border-radius: 40px 0 40px 0;
+      animation-delay: -4s, -3s;
+      border-width: 4px 2px 4px 2px;
+    }
+    &:nth-child(3) {
+      border-radius: 20px 0 0 40px;
+      animation-delay: -8s, -6s;
+      border-width: 2px 2px 6px 2px;
+    }
+
+    // Rotating gradient orb in the corner
+    &::before {
+      content: '';
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+      background: linear-gradient(135deg, rgba($hot-pink, 0.15), rgba($cyan, 0.1), rgba($lime, 0.05));
+      animation: spin-slow 20s linear infinite;
+      pointer-events: none;
+      filter: blur(30px);
+      z-index: -1;
+    }
+    &:nth-child(1)::before { top: -40px; right: -40px; }
+    &:nth-child(2)::before { bottom: -40px; left: -40px; animation-direction: reverse; }
+    &:nth-child(3)::before { top: -30px; left: 50%; }
+
+    // Glowing edge line
+    &::after {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: inherit;
+      padding: 2px;
+      background: conic-gradient(
+        $hot-pink, $cyan, $lime, $orange, $yellow, $hot-pink
+      );
+      mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      mask-composite: exclude;
+      opacity: 0.3;
+      animation: spin-slow 10s linear infinite;
+      pointer-events: none;
+    }
+
+    &:hover {
+      animation: shake-violent 0.5s ease, color-vomit 2s linear infinite;
+      background: rgba(#fff, 0.05);
+
+      &::after { opacity: 0.8; }
+      &::before { animation: anti-spin 4s linear infinite; filter: blur(20px); }
+    }
+  }
+
+  // === TEXT THAT BREATHES ===
+  .summary p,
+  .contact p {
+    color: $text-l;
+    animation: flicker 15s infinite;
+
+    &:nth-child(2) { animation-delay: -5s; }
+    &:nth-child(3) { animation-delay: -10s; }
+  }
+
+  // === SKILL PILLS ON DRUGS ===
+  .specialties .skill-item {
+    color: $text-l;
+    background: rgba(#fff, 0.02);
+    border: 1px solid rgba(#fff, 0.08);
+    position: relative;
+    overflow: hidden;
+    cursor: default;
+
+    // Every pill gets a unique vibe
+    &:nth-child(1) { border-radius: 0 16px 0 16px; }
+    &:nth-child(2) { border-radius: 16px 0 16px 0; }
+    &:nth-child(3) { border-radius: 4px 20px 4px 0; }
+    &:nth-child(4) { border-radius: 20px 4px 0 20px; }
+    &:nth-child(5) { border-radius: 0 0 20px 20px; }
+
+    // Color bar that's alive
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      animation: color-vomit 3s linear infinite;
+    }
+    &:nth-child(1)::before { animation-delay: 0s; }
+    &:nth-child(2)::before { animation-delay: -0.6s; }
+    &:nth-child(3)::before { animation-delay: -1.2s; }
+    &:nth-child(4)::before { animation-delay: -1.8s; }
+    &:nth-child(5)::before { animation-delay: -2.4s; }
+
+    // Sweeping light
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -200%;
+      width: 200%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent 30%,
+        rgba($hot-pink, 0.08) 45%,
+        rgba($cyan, 0.12) 50%,
+        rgba($hot-pink, 0.08) 55%,
+        transparent 70%
+      );
+      transition: none;
+    }
+
+    &:hover {
+      animation: pill-chaos 0.8s ease;
+      color: #fff;
+      background: rgba(#fff, 0.06);
+      border-color: rgba($hot-pink, 0.4);
+      text-shadow: 0 0 8px rgba($hot-pink, 0.3);
+
+      &::after {
+        left: 100%;
+        transition: left 0.8s ease;
+      }
+    }
+  }
+
+  // === SECTION HEADINGS: EACH ONE DIFFERENT ===
+  .content-card:nth-child(1) h4 {
+    color: $hot-pink;
+    text-shadow: 0 0 20px rgba($hot-pink, 0.4), 4px 4px 0 rgba($orange, 0.2);
+    text-transform: uppercase;
+    letter-spacing: 0.3rem;
+  }
+  .content-card:nth-child(2) h4 {
+    color: $lime;
+    text-shadow: 0 0 20px rgba($lime, 0.4), -3px 3px 0 rgba($cyan, 0.2);
+    font-style: italic;
+    transform: rotate(-2deg);
+  }
+  .content-card:nth-child(3) h4 {
+    color: $orange;
+    text-shadow: 0 0 20px rgba($orange, 0.4), 2px -2px 0 rgba($yellow, 0.3);
+    text-decoration: line-through;
+    text-decoration-color: rgba($hot-pink, 0.4);
+    text-decoration-thickness: 2px;
+  }
+
+  // === THEME SWITCHER: ALSO UNHINGED ===
+  .style-picker {
+    background: rgba(#fff, 0.04);
+    color: $text-l;
+    border: 2px solid rgba($hot-pink, 0.3);
+    border-radius: 0 16px 0 16px;
+    backdrop-filter: blur(6px);
+    animation: color-vomit 5s linear infinite;
+
+    &:hover, &.open {
+      background: rgba(#fff, 0.08);
+      color: #fff;
+      animation: color-vomit 1s linear infinite, shake-violent 0.4s ease;
+    }
+  }
+
+  .style-dropdown {
+    background: rgba(#0d0221, 0.97);
+    border: 2px solid rgba($hot-pink, 0.4);
+    border-radius: 0 20px 0 20px;
+    backdrop-filter: blur(16px);
+    box-shadow:
+      0 0 40px rgba($hot-pink, 0.15),
+      0 0 80px rgba($cyan, 0.08);
+
+    .style-option {
+      color: $text-l;
+      border-radius: 0 8px 0 8px;
+      position: relative;
+      overflow: hidden;
+
+      &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, transparent, rgba($hot-pink, 0.06), transparent);
+        transform: translateX(-100%);
+        transition: transform 0.4s ease;
+      }
+
+      &:hover {
+        background: rgba($hot-pink, 0.08);
+        color: #fff;
+        transform: translateX(6px) rotate(-1deg);
+        text-shadow: 0 0 6px rgba($hot-pink, 0.3);
+
+        &::before { transform: translateX(100%); }
+      }
+
+      &.active {
+        background: linear-gradient(90deg, rgba($hot-pink, 0.2), rgba($cyan, 0.1), rgba($lime, 0.05));
+        border-left: 4px solid;
+        animation: color-vomit 3s linear infinite;
+        color: #fff;
+        text-shadow: 0 0 10px rgba($hot-pink, 0.4);
+      }
+    }
+  }
+}
