@@ -313,6 +313,7 @@
     background: rgba(#fff, 0.02);
     border: 2px solid rgba($hot-pink, 0.3);
     position: relative;
+    opacity: 1;
     animation: card-drunk 12s ease-in-out infinite, color-vomit 8s linear infinite;
     backdrop-filter: blur(3px);
     overflow: visible;
