@@ -1,0 +1,83 @@
+// ──────────────────────────────────────
+// THEME: Original (dark)
+// ──────────────────────────────────────
+
+.theme-original {
+  $bg: #1b1b25;
+  $text: #fff;
+  $text-l: #ccc;
+  $accent: #db4d57;
+
+  background: $bg;
+  color: $text;
+
+  h1 { font-weight: 700; }
+
+  h4 {
+    font-family: 'Kalam', sans-serif;
+    font-weight: 100;
+    color: $text;
+    margin-bottom: 20px;
+  }
+
+  .subtitle {
+    color: $text-l;
+    font-family: 'Roboto Slab', sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.15rem;
+  }
+
+  a {
+    color: $accent;
+    &:hover { text-decoration: underline; }
+  }
+
+  .content-card {
+    background: transparent;
+  }
+
+  .summary p,
+  .contact p {
+    color: $text-l;
+    letter-spacing: 0.2rem;
+  }
+
+  .specialties .skill-item {
+    color: $text-l;
+    letter-spacing: 0.2rem;
+    background: transparent;
+    padding: 4px 0;
+  }
+
+  // Theme switcher
+  .style-picker {
+    background: rgba(#fff, 0.08);
+    border: 1px solid rgba(#fff, 0.15);
+    color: $text-l;
+
+    &:hover, &.open {
+      background: rgba(#fff, 0.12);
+      border-color: rgba(#fff, 0.25);
+      color: $text;
+    }
+  }
+
+  .style-dropdown {
+    background: #2e2e3d;
+    border: 1px solid rgba(#fff, 0.15);
+
+    .style-option {
+      color: $text-l;
+
+      &:hover {
+        background: rgba(#fff, 0.08);
+        color: $text;
+      }
+
+      &.active {
+        background: $accent;
+        color: #fff;
+      }
+    }
+  }
+}

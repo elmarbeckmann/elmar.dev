@@ -1,84 +1,104 @@
-<!-- for pushing -->
+<div class="page-wrapper" [ngClass]="'theme-' + currentTheme">
+  <div class="style-picker-wrapper">
+    <div
+      class="style-picker"
+      [class.open]="dropdownOpen"
+      (click)="toggleDropdown()"
+    >
+      Choose your style <span class="arrow">&#9660;</span>
+    </div>
+    <div class="style-dropdown" [class.open]="dropdownOpen">
+      @for (t of themes; track t.key) {
+        <button
+          class="style-option"
+          [class.active]="currentTheme === t.key"
+          (click)="setTheme(t.key)"
+        >
+          <span class="option-title">{{ t.label }}</span>
+          <span class="option-desc">{{ t.description }}</span>
+        </button>
+      }
+    </div>
+  </div>
 
-<div class="container">
-  <div class="row justify-content-center">
-    <div class="col-md-10">
-      <div class="title text-center">
-        <h1>Elmar Beckmann</h1>
-        <h4>Lead frontend developer / architect</h4>
-        <br />
-      </div>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-10">
+        <div class="title text-center">
+          <h1>Elmar Beckmann</h1>
+          <h4 class="subtitle">Lead frontend developer / architect</h4>
+        </div>
 
-      <br /><br />
-      <!-- <hr /> -->
-
-      <h4>Summary</h4>
-      <div class="summary">
-        <p>
-          Lead Frontend Developer and consultant working from
-          <a
-            href="https://psgtechnauts.nl"
-            target="_blank"
-            title="PSG Technauts"
-            >PSG Technauts</a
-          >, focused on building scalable, high-quality web platforms for client
-          organizations. Recent work includes Alliander and ASN Bank.
-        </p>
-        <p>
-          Now: Lead Frontend Developer at IVO Rechtspraak (Dutch government).
-        </p>
-        <p>
-          I design and deliver modern Angular applications, mentor teams, and
-          drive technical direction from architecture to execution. I am moving
-          deeper into a frontend architect role, shaping component systems,
-          performance strategy, and long-term maintainability.
-        </p>
-      </div>
-
-      <br />
-
-      <h4>Specialties</h4>
-
-      <div class="specialties">
-        <div class="row">
-          <div class="col-md-4 col-sm-4">
-            <p>Latest Angular (standalone APIs, signals)</p>
-            <p>Frontend architecture and governance</p>
-            <p>TypeScript (strict, scalable patterns)</p>
-            <p>Design systems and component libraries</p>
-            <p>Web performance optimization</p>
-          </div>
-          <div class="col-md-4 col-sm-4">
-            <p>Nx monorepo architecture</p>
-            <p>API integration (REST)</p>
-            <p>Testing: Cypress, Playwright</p>
-            <p>Accessibility (WCAG) and UX quality</p>
-            <p>CI/CD</p>
-          </div>
-          <div class="col-md-4 col-sm-4">
-            <p>Code reviews and technical leadership</p>
-            <p>Mentoring and team enablement</p>
-            <p>Documentation and standards</p>
-            <p>Agile delivery and collaboration</p>
-            <p>Product and engineering alignment</p>
+        <div class="content-card">
+          <h4>Summary</h4>
+          <div class="summary">
+            <p>
+              Lead Frontend Developer and consultant working from
+              <a
+                href="https://psgtechnauts.nl"
+                target="_blank"
+                title="PSG Technauts"
+                >PSG Technauts</a
+              >, focused on building scalable, high-quality web platforms for
+              client organizations. Recent work includes Alliander and ASN Bank.
+            </p>
+            <p>
+              Now: Lead Frontend Developer at IVO Rechtspraak (Dutch government).
+            </p>
+            <p>
+              I design and deliver modern Angular applications, mentor teams, and
+              drive technical direction from architecture to execution. I am
+              moving deeper into a frontend architect role, shaping component
+              systems, performance strategy, and long-term maintainability.
+            </p>
           </div>
         </div>
+
+        <div class="content-card">
+          <h4>Specialties</h4>
+          <div class="specialties">
+            <div class="row">
+              <div class="col-md-4 col-sm-4">
+                <p class="skill-item">Latest Angular (standalone APIs, signals)</p>
+                <p class="skill-item">Frontend architecture and governance</p>
+                <p class="skill-item">TypeScript (strict, scalable patterns)</p>
+                <p class="skill-item">Design systems and component libraries</p>
+                <p class="skill-item">Web performance optimization</p>
+              </div>
+              <div class="col-md-4 col-sm-4">
+                <p class="skill-item">Nx monorepo architecture</p>
+                <p class="skill-item">API integration (REST)</p>
+                <p class="skill-item">Testing: Cypress, Playwright</p>
+                <p class="skill-item">Accessibility (WCAG) and UX quality</p>
+                <p class="skill-item">CI/CD</p>
+              </div>
+              <div class="col-md-4 col-sm-4">
+                <p class="skill-item">Code reviews and technical leadership</p>
+                <p class="skill-item">Mentoring and team enablement</p>
+                <p class="skill-item">Documentation and standards</p>
+                <p class="skill-item">Agile delivery and collaboration</p>
+                <p class="skill-item">Product and engineering alignment</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-card">
+          <h4>Contact</h4>
+          <div class="contact">
+            <p>
+              Mail me at
+              <a href="mailto:hello@elmar.dev">hello@elmar.dev</a>, look me up
+              on
+              <a href="https://www.linkedin.com/in/elmarbeckmann/">LinkedIn</a>
+              and reach out on
+              <a href="https://twitter.com/elmardotdev">Twitter.</a>
+            </p>
+          </div>
+        </div>
+
+        <br />
       </div>
-
-      <br />
-
-      <h4>Contact</h4>
-      <div class="contact">
-        <p>
-          Mail me at <a href="mailto:hello@elmar.dev">hello@elmar.dev</a>, look
-          me up on
-          <a href="https://www.linkedin.com/in/elmarbeckmann/">LinkedIn</a> and
-          reach out on
-          <a href="https://twitter.com/elmardotdev">Twitter.</a>
-        </p>
-      </div>
-
-      <br /><br />
     </div>
   </div>
 </div>

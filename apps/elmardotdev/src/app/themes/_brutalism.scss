@@ -1,0 +1,133 @@
+// ──────────────────────────────────────
+// THEME: Neo-Brutalism
+// ──────────────────────────────────────
+
+.theme-brutalism {
+  $bg: #f5f0e8;
+  $black: #1a1a1a;
+  $accent: #ff5c36;
+  $yellow: #ffe156;
+  $blue: #3d5af1;
+  $green: #2dce89;
+  $border: 3px solid $black;
+
+  background: $bg;
+  color: $black;
+
+  h1 {
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.15rem;
+  }
+
+  h4 {
+    font-family: 'Roboto Slab', sans-serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    color: $black;
+    margin-bottom: 20px;
+    display: inline-block;
+    background: $yellow;
+    padding: 4px 12px;
+    border: $border;
+    box-shadow: 3px 3px 0 $black;
+  }
+
+  .subtitle {
+    font-weight: 600;
+    letter-spacing: 0.1rem;
+    color: $accent;
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+
+  a {
+    color: $blue;
+    font-weight: 700;
+    text-decoration: underline 3px $accent;
+    text-underline-offset: 4px;
+    &:hover { color: $accent; }
+  }
+
+  .content-card {
+    background: #fff;
+    border: $border;
+    border-radius: 0;
+    box-shadow: 6px 6px 0 $black;
+
+    &:hover {
+      box-shadow: 8px 8px 0 $black;
+      transform: translate(-2px, -2px);
+    }
+
+    &:nth-child(odd) {
+      border-left: 6px solid $accent;
+    }
+
+    &:nth-child(even) {
+      border-left: 6px solid $blue;
+    }
+  }
+
+  .summary p,
+  .contact p {
+    color: $black;
+    font-weight: 400;
+  }
+
+  .specialties .skill-item {
+    color: $black;
+    font-weight: 600;
+    background: #fff;
+    border: 2px solid $black;
+    border-radius: 0;
+    box-shadow: 3px 3px 0 $black;
+
+    &:nth-child(3n+1) { border-left: 5px solid $accent; }
+    &:nth-child(3n+2) { border-left: 5px solid $green; }
+    &:nth-child(3n+3) { border-left: 5px solid $blue; }
+
+    &:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 5px 5px 0 $black;
+    }
+  }
+
+  // Theme switcher
+  .style-picker {
+    background: #fff;
+    color: $black;
+    border: 2px solid $black;
+    border-radius: 0;
+    box-shadow: 3px 3px 0 $black;
+
+    &:hover, &.open {
+      transform: translate(-1px, -1px);
+      box-shadow: 4px 4px 0 $black;
+    }
+  }
+
+  .style-dropdown {
+    background: #fff;
+    border: 2px solid $black;
+    border-radius: 0;
+    box-shadow: 5px 5px 0 $black;
+
+    .style-option {
+      color: $black;
+      font-weight: 700;
+
+      &:hover {
+        background: #fff0a3;
+      }
+
+      &.active {
+        background: $yellow;
+        box-shadow: inset 3px 3px 0 $black;
+      }
+    }
+  }
+}
