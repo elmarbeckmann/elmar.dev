@@ -20,6 +20,10 @@ export class AppComponent {
   title = 'elmardotdev';
   dropdownOpen = false;
 
+  readonly crtEnabled = true;
+  crtState: 'boot' | 'off' | 'on' | null;
+  private pendingTheme: Theme | null = null;
+
   readonly themes: ThemeOption[] = [
     { key: 'original', label: 'The Classic', description: 'Dark, clean, and timeless' },
     { key: 'neumorphism', label: 'Soft Touch', description: 'Pillowy shadows, gentle vibes' },
@@ -33,11 +37,42 @@ export class AppComponent {
   constructor() {
     const keys = this.themes.map((t) => t.key);
     this.currentTheme = keys[Math.floor(Math.random() * keys.length)];
+    this.crtState = this.crtEnabled ? 'boot' : null;
   }
 
   setTheme(theme: Theme): void {
-    this.currentTheme = theme;
+    if (theme === this.currentTheme || this.crtState) {
+      this.dropdownOpen = false;
+      return;
+    }
     this.dropdownOpen = false;
+
+    if (this.crtEnabled) {
+      this.pendingTheme = theme;
+      this.crtState = 'off';
+    } else {
+      this.currentTheme = theme;
+    }
+  }
+
+  onCrtAnimationEnd(event: AnimationEvent): void {
+    if (event.pseudoElement) return;
+
+    switch (this.crtState) {
+      case 'boot':
+        this.crtState = null;
+        break;
+      case 'off':
+        if (this.pendingTheme) {
+          this.currentTheme = this.pendingTheme;
+          this.pendingTheme = null;
+        }
+        this.crtState = 'on';
+        break;
+      case 'on':
+        this.crtState = null;
+        break;
+    }
   }
 
   toggleDropdown(): void {

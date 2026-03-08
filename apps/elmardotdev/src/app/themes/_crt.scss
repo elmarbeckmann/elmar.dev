@@ -1,0 +1,223 @@
+// ──────────────────────────────────────
+// CRT Screen Effect
+// Realistic CRT power-off/on simulation
+// Warm P4 white phosphor afterglow
+// ──────────────────────────────────────
+
+// Phosphor colors (P4 warm white — classic TV)
+$phosphor:       rgba(255, 252, 242, 1);
+$phosphor-glow:  rgba(255, 245, 220, 0.9);
+$phosphor-bloom: rgba(255, 235, 195, 0.5);
+$phosphor-halo:  rgba(255, 225, 170, 0.2);
+
+// ── CRT Off: screen shuts down ──────
+// Sequence: flicker → brightness surge → black →
+//   line appears (vertical collapse) → line contracts →
+//   dot lingers (phosphor afterglow) → fade
+
+@keyframes crt-off-screen {
+  0%   { opacity: 0; background: transparent; }
+  5%   { opacity: 0.35; background: rgba(255, 255, 255, 0.12); }
+  8%   { opacity: 0.08; background: transparent; }
+  13%  { opacity: 0.55; background: rgba(255, 255, 255, 0.18); }
+  16%  { opacity: 0.15; background: rgba(255, 255, 255, 0.04); }
+  22%  { opacity: 1; background: rgba(255, 255, 255, 0.22); }
+  34%  { opacity: 1; background: #000; }
+  100% { opacity: 1; background: #000; }
+}
+
+@keyframes crt-off-line {
+  0%   { opacity: 0; transform: translateY(-50%) scaleX(0); height: 3px; }
+  30%  { opacity: 0; transform: translateY(-50%) scaleX(0); }
+  // Snap on full width (vertical deflection has collapsed)
+  37%  { opacity: 1; transform: translateY(-50%) scaleX(1.03); height: 3px; }
+  40%  { opacity: 1; transform: translateY(calc(-50% - 0.4px)) scaleX(0.97); height: 2.5px; }
+  42%  { opacity: 1; transform: translateY(-50%) scaleX(1); height: 2.5px; }
+  // Hold with subtle beam jitter
+  48%  { opacity: 1; transform: translateY(calc(-50% + 0.6px)) scaleX(1); height: 2px; }
+  50%  { opacity: 1; transform: translateY(calc(-50% - 0.4px)) scaleX(1); height: 2px; }
+  52%  { opacity: 1; transform: translateY(calc(-50% + 0.3px)) scaleX(1); height: 2px; }
+  // Horizontal deflection collapses
+  72%  { opacity: 1; transform: translateY(-50%) scaleX(0.12); height: 2px; }
+  82%  { opacity: 0.9; transform: translateY(-50%) scaleX(0.02); height: 1.5px; }
+  88%  { opacity: 0.4; transform: translateY(-50%) scaleX(0); height: 1px; }
+  100% { opacity: 0; transform: translateY(-50%) scaleX(0); }
+}
+
+@keyframes crt-off-dot {
+  // Phosphor afterglow — dot lingers at center after line collapses
+  0%   { opacity: 0; transform: translate(-50%, -50%) scale(0); }
+  80%  { opacity: 0; transform: translate(-50%, -50%) scale(0); }
+  84%  { opacity: 1; transform: translate(-50%, -50%) scale(1.4); }
+  88%  { opacity: 1; transform: translate(-50%, -50%) scale(0.9); }
+  92%  { opacity: 0.7; transform: translate(-50%, -50%) scale(0.7); }
+  96%  { opacity: 0.25; transform: translate(-50%, -50%) scale(0.4); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(0); }
+}
+
+// ── CRT On: screen powers up ────────
+// Sequence: black → line appears at center (H-oscillator) →
+//   screen opens vertically from line (V-deflection starts) →
+//   brightness settles
+// NO dot — the dot is a shutdown-only phosphor artifact.
+
+@keyframes crt-on-screen {
+  // Black overlay with a bright slit that opens vertically
+  0%   { opacity: 1; background: #000;
+         clip-path: inset(0 0 0 0); }
+  // Hold black while line warms up
+  40%  { opacity: 1; background: #000;
+         clip-path: inset(0 0 0 0); }
+  // Screen opens from center — vertical deflection kicking in
+  42%  { clip-path: inset(49.5% 0 49.5% 0); }
+  55%  { clip-path: inset(35% 0 35% 0); }
+  68%  { clip-path: inset(12% 0 12% 0); }
+  78%  { clip-path: inset(2% 0 2% 0); }
+  82%  { clip-path: inset(0 0 0 0); opacity: 1; background: rgba(255, 255, 255, 0.05); }
+  92%  { opacity: 0; }
+  100% { opacity: 0; clip-path: inset(0 0 0 0); }
+}
+
+@keyframes crt-on-line {
+  // Line appears as H-oscillator starts, before screen opens
+  0%   { opacity: 0; transform: translateY(-50%) scaleX(0); height: 1.5px; }
+  // Jittery warm-up
+  12%  { opacity: 0.6; transform: translateY(calc(-50% + 0.5px)) scaleX(0.02); height: 2px; }
+  16%  { opacity: 0.8; transform: translateY(calc(-50% - 0.4px)) scaleX(0.05); height: 2px; }
+  20%  { opacity: 1; transform: translateY(calc(-50% + 0.3px)) scaleX(0.1); height: 2px; }
+  // Expand with overshoot
+  38%  { opacity: 1; transform: translateY(-50%) scaleX(1.03); height: 3px; }
+  41%  { opacity: 1; transform: translateY(-50%) scaleX(0.97); height: 2.5px; }
+  44%  { opacity: 1; transform: translateY(-50%) scaleX(1); height: 2.5px; }
+  // Fade as the screen opens and content takes over
+  60%  { opacity: 0.3; transform: translateY(-50%) scaleX(1); }
+  72%  { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+// ── CRT Boot: initial cold start ────
+// Same as on, but slower — tube needs to warm up.
+
+@keyframes crt-boot-screen {
+  0%   { opacity: 1; background: #000;
+         clip-path: inset(0 0 0 0); }
+  // Longer black hold — cathode warming
+  52%  { opacity: 1; background: #000;
+         clip-path: inset(0 0 0 0); }
+  // Screen opens from center
+  54%  { clip-path: inset(49.5% 0 49.5% 0); }
+  64%  { clip-path: inset(35% 0 35% 0); }
+  76%  { clip-path: inset(10% 0 10% 0); }
+  84%  { clip-path: inset(1% 0 1% 0); }
+  88%  { clip-path: inset(0 0 0 0); opacity: 1; background: rgba(255, 255, 255, 0.04); }
+  96%  { opacity: 0; }
+  100% { opacity: 0; clip-path: inset(0 0 0 0); }
+}
+
+@keyframes crt-boot-line {
+  0%   { opacity: 0; transform: translateY(-50%) scaleX(0); }
+  // Nothing for a while — tube is cold
+  30%  { opacity: 0; transform: translateY(-50%) scaleX(0); }
+  // Slow, jittery warm-up
+  36%  { opacity: 0.5; transform: translateY(calc(-50% + 0.6px)) scaleX(0.01); height: 1.5px; }
+  38%  { opacity: 0.3; transform: translateY(calc(-50% - 0.4px)) scaleX(0.008); height: 1.5px; }
+  40%  { opacity: 0.7; transform: translateY(calc(-50% + 0.3px)) scaleX(0.02); height: 2px; }
+  42%  { opacity: 0.5; transform: translateY(calc(-50% - 0.5px)) scaleX(0.015); height: 1.5px; }
+  44%  { opacity: 0.9; transform: translateY(calc(-50% + 0.4px)) scaleX(0.04); height: 2px; }
+  // Oscillator locks on, expands with overshoot
+  54%  { opacity: 1; transform: translateY(-50%) scaleX(1.03); height: 3px; }
+  56%  { opacity: 1; transform: translateY(-50%) scaleX(0.97); height: 2.5px; }
+  58%  { opacity: 1; transform: translateY(-50%) scaleX(1); height: 2.5px; }
+  // Fade as screen opens
+  72%  { opacity: 0.2; }
+  82%  { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+// ── Overlay element ─────────────────
+
+.crt-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: #000;
+  opacity: 1;
+  pointer-events: auto;
+
+  // Phosphor line — Gaussian intensity falloff at edges
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 3px;
+    transform: translateY(-50%) scaleX(0);
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 248, 230, 0.35) 5%,
+      rgba(255, 250, 235, 0.8) 18%,
+      $phosphor 35%,
+      $phosphor 65%,
+      rgba(255, 250, 235, 0.8) 82%,
+      rgba(255, 248, 230, 0.35) 95%,
+      transparent 100%
+    );
+    box-shadow:
+      0 0 6px 2px $phosphor-glow,
+      0 0 20px 8px $phosphor-bloom,
+      0 0 60px 22px $phosphor-halo,
+      0 -3px 16px 5px rgba(255, 240, 210, 0.2),
+      0 3px 16px 5px rgba(255, 240, 210, 0.2);
+    opacity: 0;
+  }
+
+  // Phosphor dot — only used during shutdown afterglow
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background: radial-gradient(
+      circle,
+      $phosphor 0%,
+      $phosphor-glow 25%,
+      $phosphor-bloom 55%,
+      transparent 100%
+    );
+    box-shadow:
+      0 0 15px 8px $phosphor-glow,
+      0 0 40px 20px $phosphor-bloom,
+      0 0 100px 50px $phosphor-halo;
+    opacity: 0;
+  }
+
+  // ── State animations ──
+
+  &.crt-off {
+    animation: crt-off-screen 0.6s ease-in both;
+    &::before { animation: crt-off-line 0.6s ease both; }
+    &::after { animation: crt-off-dot 0.6s ease both; }
+  }
+
+  &.crt-on {
+    animation: crt-on-screen 0.7s ease-out both;
+    &::before { animation: crt-on-line 0.7s ease both; }
+    // No dot animation — dot is shutdown-only
+  }
+
+  &.crt-boot {
+    animation: crt-boot-screen 0.9s ease-out both;
+    &::before { animation: crt-boot-line 0.9s ease both; }
+    // No dot animation — dot is shutdown-only
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    display: none;
+  }
+}

@@ -124,3 +124,11 @@
     </div>
   </main>
 </div>
+
+@if (crtEnabled && crtState) {
+  <div
+    class="crt-overlay"
+    [ngClass]="'crt-' + crtState"
+    (animationend)="onCrtAnimationEnd($event)"
+  ></div>
+}
