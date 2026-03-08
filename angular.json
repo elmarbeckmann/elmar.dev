@@ -17,7 +17,7 @@
             "tsConfig": "apps/elmardotdev/tsconfig.app.json",
             "aot": true,
             "assets": [
-              "apps/elmardotdev/src/favicon.ico",
+              "apps/elmardotdev/src/favicon.svg",
               "apps/elmardotdev/src/assets",
               "apps/elmardotdev/src/robots.txt",
               "apps/elmardotdev/src/sitemap.xml"
