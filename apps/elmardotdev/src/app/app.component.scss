@@ -1,9 +1,8 @@
-@use 'themes/original';
-@use 'themes/neumorphism';
-@use 'themes/brutalism';
-@use 'themes/maximalism';
-@use 'themes/chaos';
-@use 'themes/crt';
+$white: #fff;
+$black: #000;
+$grey: #6b6b6b;
+$line: #e5e5e5;
+$measure: 40rem;
 
 // ──────────────────────────────────────
 // Entrance animations
@@ -31,159 +30,128 @@
   }
 }
 
-@keyframes fade-in-right {
-  from {
-    opacity: 0;
-    transform: translateX(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
 // ──────────────────────────────────────
-// Shared base
+// Layout
 // ──────────────────────────────────────
 
 .page-wrapper {
   min-height: 100vh;
-  transition:
-    background 0.4s ease,
-    color 0.4s ease;
+}
+
+.page {
+  padding: 0 1.5rem;
+}
+
+.title,
+.content-card {
+  max-width: $measure;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .title {
-  margin-top: 80px;
-  margin-bottom: 30px;
+  margin-top: 140px;
+  margin-bottom: 5rem;
   opacity: 0;
   animation: fade-down 0.6s ease forwards;
   animation-delay: 0.1s;
 }
 
 .content-card {
-  padding: 30px 35px;
-  margin-bottom: 35px;
-  transition: all 0.3s ease;
+  padding: 0;
+  margin-bottom: 4rem;
   opacity: 0;
   animation: fade-up 0.5s ease forwards;
 
-  &:nth-child(1) {
+  &:nth-of-type(1) {
     animation-delay: 0.25s;
   }
-  &:nth-child(2) {
+  &:nth-of-type(2) {
     animation-delay: 0.4s;
   }
-  &:nth-child(3) {
+  &:nth-of-type(3) {
     animation-delay: 0.55s;
+  }
+}
+
+// ──────────────────────────────────────
+// Typography
+// ──────────────────────────────────────
+
+h1 {
+  font-size: clamp(2.75rem, 7vw, 4.5rem);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1;
+  margin-bottom: 16px;
+}
+
+.subtitle {
+  color: $grey;
+  font-size: 1.125rem;
+  margin: 0;
+}
+
+h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+a {
+  color: $black;
+  text-decoration: underline 1px $line;
+  text-underline-offset: 4px;
+
+  &:hover {
+    text-decoration-color: $black;
   }
 }
 
 .summary p,
 .contact p {
-  font-size: 1rem;
-  letter-spacing: 0.08rem;
-  line-height: 1.8;
+  color: $grey;
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  max-width: 68ch;
+}
+
+.skills {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  columns: 2;
+  column-gap: 2rem;
+}
+
+@media (max-width: 575px) {
+  .skills {
+    columns: 1;
+  }
 }
 
 .specialties .skill-item {
-  font-size: 0.9rem;
-  letter-spacing: 0.06rem;
-  line-height: 1.5;
-  padding: 10px 16px;
-  margin-bottom: 10px;
-  transition: all 0.3s ease;
-  opacity: 0;
-  animation: fade-up 0.4s ease forwards;
-
-  @for $i from 1 through 15 {
-    &:nth-child(#{$i}) {
-      animation-delay: #{0.5 + $i * 0.06}s;
-    }
-  }
-}
-
-a {
-  transition: color 0.2s ease;
+  color: $grey;
+  font-size: 1rem;
+  line-height: 1.75;
+  padding: 0;
+  margin: 0 0 0.5rem;
+  break-inside: avoid;
 }
 
 // ──────────────────────────────────────
-// Style Picker (dropdown)
+// Accessibility
 // ──────────────────────────────────────
 
-.style-picker-wrapper {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 100;
-  opacity: 0;
-  animation: fade-in-right 0.5s ease forwards;
-  animation-delay: 0.7s;
+a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
 }
 
-.style-picker {
-  cursor: pointer;
-  font-family: 'Roboto Slab', sans-serif;
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.04rem;
-  padding: 10px 18px;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  user-select: none;
-
-  .arrow {
-    font-size: 0.6rem;
-    transition: transform 0.3s ease;
-  }
-
-  &.open .arrow {
-    transform: rotate(180deg);
-  }
-}
-
-.style-dropdown {
-  position: absolute;
-  top: calc(100% + 8px);
-  right: 0;
-  min-width: 220px;
-  padding: 6px;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-8px);
-  transition: all 0.25s ease;
-
-  &.open {
+@media (prefers-reduced-motion: reduce) {
+  .title,
+  .content-card {
+    animation: none;
     opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
-}
-
-.style-option {
-  display: block;
-  width: 100%;
-  padding: 10px 16px;
-  border: none;
-  background: none;
-  text-align: left;
-  cursor: pointer;
-  font-family: 'Roboto Slab', sans-serif;
-  font-size: 0.85rem;
-  transition: all 0.2s ease;
-
-  .option-title {
-    display: block;
-    font-weight: 700;
-    margin-bottom: 2px;
-  }
-
-  .option-desc {
-    display: block;
-    font-size: 0.72rem;
-    opacity: 0.65;
-    font-weight: 400;
   }
 }
