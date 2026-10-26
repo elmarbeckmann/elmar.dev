@@ -12,8 +12,7 @@ interface ThemeOption {
 @Component({
   selector: 'elmardotdev-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  standalone: true,
+  styleUrl: './app.component.scss',
   imports: [NgClass],
 })
 export class AppComponent {
@@ -25,11 +24,31 @@ export class AppComponent {
   private pendingTheme: Theme | null = null;
 
   readonly themes: ThemeOption[] = [
-    { key: 'original', label: 'The Classic', description: 'Dark, clean, and timeless' },
-    { key: 'neumorphism', label: 'Soft Touch', description: 'Pillowy shadows, gentle vibes' },
-    { key: 'brutalism', label: 'I Am The Brute', description: 'Raw, bold, unapologetic' },
-    { key: 'maximalism', label: 'More Is More', description: 'Neon dreams, maximum impact' },
-    { key: 'chaos', label: 'Fever Dream', description: 'Your screen called. It wants therapy.' },
+    {
+      key: 'original',
+      label: 'The Classic',
+      description: 'Dark, clean, and timeless',
+    },
+    {
+      key: 'neumorphism',
+      label: 'Soft Touch',
+      description: 'Pillowy shadows, gentle vibes',
+    },
+    {
+      key: 'brutalism',
+      label: 'I Am The Brute',
+      description: 'Raw, bold, unapologetic',
+    },
+    {
+      key: 'maximalism',
+      label: 'More Is More',
+      description: 'Neon dreams, maximum impact',
+    },
+    {
+      key: 'chaos',
+      label: 'Fever Dream',
+      description: 'Your screen called. It wants therapy.',
+    },
   ];
 
   currentTheme: Theme;

@@ -13,7 +13,9 @@
   background: $bg;
   color: $text;
 
-  h1 { font-weight: 700; }
+  h1 {
+    font-weight: 700;
+  }
 
   h2 {
     font-family: 'Kalam', sans-serif;
@@ -32,16 +34,23 @@
   a {
     color: $accent;
     font-weight: 600;
-    &:hover { color: #b83440; text-decoration: none; }
+    &:hover {
+      color: #b83440;
+      text-decoration: none;
+    }
   }
 
   .content-card {
     background: $bg;
     border-radius: 20px;
-    box-shadow: 8px 8px 16px $shadow-d, -8px -8px 16px $shadow-l;
+    box-shadow:
+      8px 8px 16px $shadow-d,
+      -8px -8px 16px $shadow-l;
 
     &:hover {
-      box-shadow: 10px 10px 20px $shadow-d, -10px -10px 20px $shadow-l;
+      box-shadow:
+        10px 10px 20px $shadow-d,
+        -10px -10px 20px $shadow-l;
     }
   }
 
@@ -54,7 +63,9 @@
     color: $text-l;
     background: $bg;
     border-radius: 16px;
-    box-shadow: inset 4px 4px 8px $shadow-d, inset -4px -4px 8px $shadow-l;
+    box-shadow:
+      inset 4px 4px 8px $shadow-d,
+      inset -4px -4px 8px $shadow-l;
   }
 
   // Theme switcher
@@ -62,11 +73,16 @@
     background: $bg;
     color: $text-l;
     border-radius: 12px;
-    box-shadow: 4px 4px 8px $shadow-d, -4px -4px 8px $shadow-l;
+    box-shadow:
+      4px 4px 8px $shadow-d,
+      -4px -4px 8px $shadow-l;
     border: none;
 
-    &:hover, &.open {
-      box-shadow: 6px 6px 12px $shadow-d, -6px -6px 12px $shadow-l;
+    &:hover,
+    &.open {
+      box-shadow:
+        6px 6px 12px $shadow-d,
+        -6px -6px 12px $shadow-l;
       color: $text;
     }
   }
@@ -75,19 +91,25 @@
     background: $bg;
     border: none;
     border-radius: 16px;
-    box-shadow: 8px 8px 16px $shadow-d, -8px -8px 16px $shadow-l;
+    box-shadow:
+      8px 8px 16px $shadow-d,
+      -8px -8px 16px $shadow-l;
 
     .style-option {
       color: $text-l;
       border-radius: 10px;
 
       &:hover {
-        box-shadow: inset 2px 2px 4px $shadow-d, inset -2px -2px 4px $shadow-l;
+        box-shadow:
+          inset 2px 2px 4px $shadow-d,
+          inset -2px -2px 4px $shadow-l;
         color: $text;
       }
 
       &.active {
-        box-shadow: inset 3px 3px 6px $shadow-d, inset -3px -3px 6px $shadow-l;
+        box-shadow:
+          inset 3px 3px 6px $shadow-d,
+          inset -3px -3px 6px $shadow-l;
         color: $accent;
       }
     }

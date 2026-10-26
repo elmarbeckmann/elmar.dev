@@ -1,152 +1,48 @@
-# Agent Guide (elmardotdev)
+# AGENTS.md
 
-This file describes how to work in this Nx + Angular repository.
-Follow it when making changes, running commands, or reviewing code.
+Personal portfolio site for Elmar Beckmann, deployed at https://elmar.dev. It is a static single-page site: one Angular 22 standalone component, no routing, no state management, no backend.
 
-## Repository Overview
+## Workspace
 
-- Nx workspace with Angular app `elmardotdev`
-- Unit tests: Jest
-- E2E tests: Cypress (legacy `cypress.json` config)
-- Linting: ESLint (Nx + Angular ESLint)
-- Formatting: Prettier (single quotes)
+- Nx 24 workspace with two projects: the app `elmardotdev` and the Cypress e2e project `elmardotdev-e2e`. `libs/` is empty.
+- Run every task through `nx`. The workspace has no `angular.json`, so the `ng` CLI fails. The `test`, `lint` and `e2e` targets are inferred by the plugins in `nx.json`; `build` and `serve` are in `apps/elmardotdev/project.json`.
+- Scripts for common tasks are in `package.json`.
+- The build writes the site to `dist/apps/elmardotdev/browser`.
 
-## Primary Projects
+## Site structure
 
-- App: `elmardotdev` (apps/elmardotdev)
-- E2E: `elmardotdev-e2e` (apps/elmardotdev-e2e)
+- The whole site is `apps/elmardotdev/src/app/app.component.{ts,html,scss}`. SEO metadata and the JSON-LD structured data are in `apps/elmardotdev/src/index.html`.
+- Visible content and the metadata in `index.html` describe the same facts (role, employer, client, social links). When one changes, update the other.
+- Change detection uses Zone.js (`provideZoneChangeDetection()` in `main.ts`, Zone.js test setup in `test-setup.ts`).
+- Bootstrap 4.3.1 (CSS only) and Google Fonts load from CDNs in `index.html`. There is no Bootstrap package in `package.json`.
 
-## Install
+## Themes
 
-- `npm install`
+- The theme picker offers five themes, defined in the `themes` array in `app.component.ts`: `original`, `neumorphism`, `brutalism`, `maximalism` and `chaos`. A random theme loads on each visit.
+- Each theme is a partial in `apps/elmardotdev/src/app/themes/` with all styles scoped under `.theme-<key>`, applied through `[ngClass]` on the page wrapper. `app.component.scss` holds the shared base styles and `@use`s every partial.
+- The template uses generic class names (`content-card`, `skill-item`, `style-picker`). Theme-specific styling goes in the theme partial, never in the template.
+- `_crt.scss` is the CRT screen effect that plays on page boot and between theme switches (`crtState` in the component). It is not a theme.
+- To add a theme: add the key to the `Theme` union and the `themes` array, add `themes/_<key>.scss`, and `@use` it in `app.component.scss`.
 
-## Dev Server
+## Conventions
 
-- `ng serve elmardotdev`
-- Default URL: http://localhost:4200
+- Selector prefix `elmardotdev`: kebab-case for components, camelCase for directives. ESLint enforces this.
+- Use built-in control flow (`@if`, `@for` with `track`) in templates and keep logic in the component class.
+- Group imports: Angular and third-party, then workspace, then relative, with a blank line between groups.
 
-## Build
+## Testing
 
-- `ng build elmardotdev`
-- Production build: `ng build elmardotdev --prod`
+- Jest 30 renamed the path filter: run one spec with `nx test elmardotdev --testPathPatterns=app.component.spec.ts`.
+- Run one e2e spec with `nx e2e elmardotdev-e2e --spec=apps/elmardotdev-e2e/src/e2e/app.cy.ts`.
+- If Cypress fails with `bad option: --no-sandbox`, the shell has `ELECTRON_RUN_AS_NODE=1` set. Run it with `env -u ELECTRON_RUN_AS_NODE`.
+- `npm run format:check` compares against `main`. Use `nx format:check --all` to check every file.
 
-## Lint
+## Deployment
 
-- `npm run lint` (runs `nx workspace-lint && ng lint`)
-- App lint only: `ng lint elmardotdev`
-- E2E lint only: `nx lint elmardotdev-e2e`
+- Vercel deploys the GitHub repo `elmarbeckmann/elmar.dev`: `main` goes to production, every other branch gets a preview URL per commit.
+- `vercel.json` sets the build command and the output folder. If the build output path changes, update `vercel.json`, or the deployment serves a 404.
 
-## Unit Tests (Jest)
+## Dependencies
 
-- Run all tests: `ng test elmardotdev`
-- Nx variant: `nx test elmardotdev`
-- Single test file (pass-through to Jest):
-  - `nx test elmardotdev --testPathPattern=apps/elmardotdev/src/app/app.component.spec.ts`
-  - `nx test elmardotdev --testPathPattern=app.component.spec.ts`
-- Single test name (pass-through to Jest):
-  - `nx test elmardotdev --testNamePattern="should create"`
-
-## E2E Tests (Cypress)
-
-- Run all e2e: `nx e2e elmardotdev-e2e`
-- Run a single spec:
-  - `nx e2e elmardotdev-e2e --spec=apps/elmardotdev-e2e/src/integration/**/*.spec.ts`
-
-## Affected Commands (Nx)
-
-- `npm run affected:test`
-- `npm run affected:lint`
-- `npm run affected:build`
-
-## Formatting
-
-- Format all: `npm run format` or `npm run format:write`
-- Check formatting: `npm run format:check`
-
-## Code Style Guidelines
-
-### TypeScript
-
-- Use single quotes (Prettier config).
-- Prefer explicit types for public APIs and complex objects.
-- Keep Angular decorators close to class definitions.
-- Use `const` by default, `let` only when reassigned.
-- Avoid `any`; use union types or generics.
-- Prefer `readonly` for immutable fields where applicable.
-- Narrow types with type guards instead of `as` casts.
-
-### Angular Conventions
-
-- Component selector: element, prefix `elmardotdev`, kebab-case.
-  - Example: `elmardotdev-root`
-- Directive selector: attribute, prefix `elmardotdev`, camelCase.
-  - Example: `elmardotdevFocus`
-- Keep modules/components/services in their feature folders.
-- Use `styleUrls` and external templates (default setup).
-
-### Imports
-
-- Group imports by source:
-  1. Angular / third-party
-  2. Workspace / app imports
-  3. Relative imports
-- Separate groups with a blank line.
-- Avoid deep relative imports if a path alias exists.
-
-### Naming
-
-- Classes: PascalCase
-- Functions/variables: camelCase
-- Files: kebab-case by Angular conventions
-- Tests: `*.spec.ts`
-
-### Templates (HTML)
-
-- Use Angular template syntax with readability in mind.
-- Prefer `*ngIf`/`*ngFor` with `trackBy` for lists.
-- Avoid complex logic in templates; move to component TS.
-
-### Styles (SCSS)
-
-- Keep component styles scoped to the component.
-- Prefer variables for repeated values.
-- Use BEM-like naming if needed for clarity.
-
-### Error Handling
-
-- Fail fast for invalid inputs in component logic.
-- For async flows, surface errors in the UI rather than `console.log`.
-- Keep error messages user-friendly and actionable.
-
-### Testing Practices
-
-- Prefer focused unit tests for component logic and services.
-- Keep tests deterministic; avoid timing-based flakiness.
-- Use clear test names that describe behavior.
-
-## Lint Rules to Remember
-
-- Nx module boundary enforcement is enabled.
-- Angular ESLint enforces selector prefixes and styles.
-- Cypress config disables `no-var-requires` in plugins file.
-
-## Files to Check for Rules
-
-- ESLint root: `.eslintrc.json`
-- App ESLint: `apps/elmardotdev/.eslintrc.json`
-- E2E ESLint: `apps/elmardotdev-e2e/.eslintrc.json`
-- Prettier: `.prettierrc`
-- Nx settings: `nx.json`
-- Angular targets: `angular.json`
-
-## Notes for Agents
-
-- Prefer `nx` / `ng` commands so targets resolve correctly.
-- Keep workspace defaults in mind (`defaultBase` is `master`).
-- Do not modify build/test scripts without justification.
-- If adding new files, follow existing folder structure.
-
-## Cursor / Copilot Rules
-
-- No Cursor rules found (.cursor/rules/ or .cursorrules).
-- No Copilot instructions found (.github/copilot-instructions.md).
+- Update with `nx migrate latest`, then `npm install` and `nx migrate --run-migrations`.
+- TypeScript stays within the range that `@angular/compiler-cli` accepts as a peer dependency, even when a newer TypeScript is out.

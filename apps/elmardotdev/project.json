@@ -1,0 +1,74 @@
+{
+  "name": "elmardotdev",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/elmardotdev/src",
+  "prefix": "elmardotdev",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@angular/build:application",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/apps/elmardotdev",
+        "index": "apps/elmardotdev/src/index.html",
+        "browser": "apps/elmardotdev/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/elmardotdev/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/elmardotdev/src/favicon.svg",
+          "apps/elmardotdev/src/favicon.ico",
+          "apps/elmardotdev/src/assets",
+          "apps/elmardotdev/src/robots.txt",
+          "apps/elmardotdev/src/sitemap.xml"
+        ],
+        "styles": ["apps/elmardotdev/src/styles.scss"]
+      },
+      "configurations": {
+        "production": {
+          "outputHashing": "all",
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "2mb",
+              "maximumError": "5mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "32kb",
+              "maximumError": "48kb"
+            }
+          ]
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
+        }
+      }
+    },
+    "serve": {
+      "continuous": true,
+      "executor": "@angular/build:dev-server",
+      "defaultConfiguration": "development",
+      "configurations": {
+        "production": {
+          "buildTarget": "elmardotdev:build:production"
+        },
+        "development": {
+          "buildTarget": "elmardotdev:build:development"
+        }
+      },
+      "readyWhen": {
+        "signal": true
+      }
+    },
+    "test": {
+      "options": {
+        "passWithNoTests": true
+      }
+    }
+  }
+}

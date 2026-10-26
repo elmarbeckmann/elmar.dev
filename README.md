@@ -4,11 +4,11 @@ My personal website. If you need it, fork it! I'm using [Nx](https://nx.dev) wit
 
 ## Development server
 
-Run `ng serve elmardotdev` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
+Run `nx serve elmardotdev` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
 
 ## Build
 
-Run `ng build elmardotdev` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Run `nx build elmardotdev` for a production build. The build artifacts are stored in `dist/apps/elmardotdev/browser`. Use `-c development` for a development build.
 
 ## Further help
 

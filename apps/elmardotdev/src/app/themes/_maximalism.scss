@@ -18,7 +18,12 @@
   h1 {
     font-weight: 900;
     font-size: 3rem;
-    background: linear-gradient(90deg, $accent-pink, $accent-cyan, $accent-yellow);
+    background: linear-gradient(
+      90deg,
+      $accent-pink,
+      $accent-cyan,
+      $accent-yellow
+    );
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -95,11 +100,21 @@
       width: 3px;
     }
 
-    &:nth-child(5n+1)::before { background: $accent-pink; }
-    &:nth-child(5n+2)::before { background: $accent-cyan; }
-    &:nth-child(5n+3)::before { background: $accent-yellow; }
-    &:nth-child(5n+4)::before { background: $accent-purple; }
-    &:nth-child(5n+5)::before { background: linear-gradient($accent-pink, $accent-cyan); }
+    &:nth-child(5n + 1)::before {
+      background: $accent-pink;
+    }
+    &:nth-child(5n + 2)::before {
+      background: $accent-cyan;
+    }
+    &:nth-child(5n + 3)::before {
+      background: $accent-yellow;
+    }
+    &:nth-child(5n + 4)::before {
+      background: $accent-purple;
+    }
+    &:nth-child(5n + 5)::before {
+      background: linear-gradient($accent-pink, $accent-cyan);
+    }
 
     &:hover {
       background: rgba(#fff, 0.07);
@@ -115,7 +130,8 @@
     border-radius: 10px;
     backdrop-filter: blur(6px);
 
-    &:hover, &.open {
+    &:hover,
+    &.open {
       background: rgba(#fff, 0.1);
       border-color: rgba($accent-cyan, 0.3);
       color: $text;
