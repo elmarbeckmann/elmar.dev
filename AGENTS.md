@@ -13,16 +13,15 @@ Personal portfolio site for Elmar Beckmann, deployed at https://elmar.dev. It is
 
 - The whole site is `apps/elmardotdev/src/app/app.component.{ts,html,scss}`. SEO metadata and the JSON-LD structured data are in `apps/elmardotdev/src/index.html`.
 - Visible content and the metadata in `index.html` describe the same facts (role, employer, client, social links). When one changes, update the other.
+- The build prerenders `/` to static HTML (`outputMode: "static"`, server entry `main.server.ts`, hydration in `main.ts`). There is no server runtime.
 - Change detection uses Zone.js (`provideZoneChangeDetection()` in `main.ts`, Zone.js test setup in `test-setup.ts`).
-- Bootstrap 4.3.1 (CSS only) and Google Fonts load from CDNs in `index.html`. There is no Bootstrap package in `package.json`.
+- There is no CSS framework. The reset is in `styles.scss`. Google Fonts loads from a CDN in `index.html`.
 
-## Themes
+## Styling
 
-- The theme picker offers five themes, defined in the `themes` array in `app.component.ts`: `original`, `neumorphism`, `brutalism`, `maximalism` and `chaos`. A random theme loads on each visit.
-- Each theme is a partial in `apps/elmardotdev/src/app/themes/` with all styles scoped under `.theme-<key>`, applied through `[ngClass]` on the page wrapper. `app.component.scss` holds the shared base styles and `@use`s every partial.
-- The template uses generic class names (`content-card`, `skill-item`, `style-picker`). Theme-specific styling goes in the theme partial, never in the template.
-- `_crt.scss` is the CRT screen effect that plays on page boot and between theme switches (`crtState` in the component). It is not a theme.
-- To add a theme: add the key to the `Theme` union and the `themes` array, add `themes/_<key>.scss`, and `@use` it in `app.component.scss`.
+- All styles are in `apps/elmardotdev/src/app/app.component.scss`, with the shared SCSS variables at the top.
+- The template uses generic class names (`content-card`, `skill-item`). Visual styling goes in the stylesheet, not in the template.
+- The only web font is Geist, loaded from Google Fonts in `index.html`.
 
 ## Conventions
 
@@ -33,7 +32,7 @@ Personal portfolio site for Elmar Beckmann, deployed at https://elmar.dev. It is
 ## Testing
 
 - Jest 30 renamed the path filter: run one spec with `nx test elmardotdev --testPathPatterns=app.component.spec.ts`.
-- Run one e2e spec with `nx e2e elmardotdev-e2e --spec=apps/elmardotdev-e2e/src/e2e/app.cy.ts`.
+- Run one e2e spec with `nx e2e elmardotdev-e2e --spec=src/e2e/app.cy.ts`.
 - If Cypress fails with `bad option: --no-sandbox`, the shell has `ELECTRON_RUN_AS_NODE=1` set. Run it with `env -u ELECTRON_RUN_AS_NODE`.
 - `npm run format:check` compares against `main`. Use `nx format:check --all` to check every file.
 

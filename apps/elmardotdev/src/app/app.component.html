@@ -1,137 +1,85 @@
-<div class="page-wrapper" [ngClass]="'theme-' + currentTheme">
-  <nav class="style-picker-wrapper" aria-label="Theme selector">
-    <div
-      class="style-picker"
-      [class.open]="dropdownOpen"
-      (click)="toggleDropdown()"
-      role="button"
-      aria-haspopup="listbox"
-      [attr.aria-expanded]="dropdownOpen"
-      tabindex="0"
-      (keydown.enter)="toggleDropdown()"
-      (keydown.space)="toggleDropdown(); $event.preventDefault()"
-    >
-      Choose your style <span class="arrow" aria-hidden="true">&#9660;</span>
-    </div>
-    <div
-      class="style-dropdown"
-      [class.open]="dropdownOpen"
-      role="listbox"
-      aria-label="Theme options"
-    >
-      @for (t of themes; track t.key) {
-        <button
-          class="style-option"
-          [class.active]="currentTheme === t.key"
-          (click)="setTheme(t.key)"
-          role="option"
-          [attr.aria-selected]="currentTheme === t.key"
-        >
-          <span class="option-title">{{ t.label }}</span>
-          <span class="option-desc">{{ t.description }}</span>
-        </button>
-      }
-    </div>
-  </nav>
+<div class="page-wrapper">
+  <main class="page">
+    <header class="title">
+      <h1>Elmar Beckmann</h1>
+      <p class="subtitle">Lead frontend developer, architect and AI engineer</p>
+    </header>
 
-  <main class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-10">
-        <header class="title text-center">
-          <h1>Elmar Beckmann</h1>
-          <p class="subtitle">Lead frontend developer / architect</p>
-        </header>
-
-        <section class="content-card" aria-labelledby="section-summary">
-          <h2 id="section-summary">Summary</h2>
-          <div class="summary">
-            <p>
-              Lead Frontend Developer and consultant working from
-              <a
-                href="https://psgtechnauts.nl"
-                target="_blank"
-                rel="noopener noreferrer"
-                title="PSG Technauts"
-                >PSG Technauts</a
-              >, focused on building scalable, high-quality web platforms for
-              client organizations. Recent work includes IVO Rechtspraak,
-              Alliander and ASN Bank.
-            </p>
-            <p>
-              Now: Senior Frontend Engineer at Stedin (Dutch grid operator).
-            </p>
-            <p>
-              I design and deliver modern Angular applications, mentor teams,
-              and drive technical direction from architecture to execution. I am
-              moving deeper into a frontend architect role, shaping component
-              systems, performance strategy, and long-term maintainability.
-            </p>
-          </div>
-        </section>
-
-        <section class="content-card" aria-labelledby="section-specialties">
-          <h2 id="section-specialties">Specialties</h2>
-          <div class="specialties">
-            <div class="row">
-              <div class="col-md-4 col-sm-4">
-                <p class="skill-item">
-                  Latest Angular (standalone APIs, signals)
-                </p>
-                <p class="skill-item">Frontend architecture and governance</p>
-                <p class="skill-item">TypeScript (strict, scalable patterns)</p>
-                <p class="skill-item">Design systems and component libraries</p>
-                <p class="skill-item">Web performance optimization</p>
-              </div>
-              <div class="col-md-4 col-sm-4">
-                <p class="skill-item">Nx monorepo architecture</p>
-                <p class="skill-item">API integration (REST)</p>
-                <p class="skill-item">Testing: Cypress, Playwright</p>
-                <p class="skill-item">Accessibility (WCAG) and UX quality</p>
-                <p class="skill-item">CI/CD</p>
-              </div>
-              <div class="col-md-4 col-sm-4">
-                <p class="skill-item">Code reviews and technical leadership</p>
-                <p class="skill-item">Mentoring and team enablement</p>
-                <p class="skill-item">Documentation and standards</p>
-                <p class="skill-item">Agile delivery and collaboration</p>
-                <p class="skill-item">Product and engineering alignment</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="content-card" aria-labelledby="section-contact">
-          <h2 id="section-contact">Contact</h2>
-          <div class="contact">
-            <p>
-              Mail me at
-              <a href="mailto:hello@elmar.dev">hello@elmar.dev</a>, look me up
-              on
-              <a
-                href="https://www.linkedin.com/in/elmarbeckmann/"
-                target="_blank"
-                rel="noopener noreferrer"
-                >LinkedIn</a
-              >
-              and reach out on
-              <a
-                href="https://x.com/elmardotdev"
-                target="_blank"
-                rel="noopener noreferrer"
-                >X</a
-              >.
-            </p>
-          </div>
-        </section>
+    <section class="content-card" aria-labelledby="section-summary">
+      <h2 id="section-summary">Summary</h2>
+      <div class="summary">
+        <p>
+          Lead Frontend Developer and consultant working from
+          <a
+            href="https://psgtechnauts.nl"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="PSG Technauts"
+            >PSG Technauts</a
+          >, focused on building scalable, high-quality web platforms for client
+          organizations. Recent work includes IVO Rechtspraak, Alliander and ASN
+          Bank.
+        </p>
+        <p>Now: Senior Frontend Engineer at Stedin (Dutch grid operator).</p>
+        <p>
+          I am also an AI engineer focused on agentic development: I design
+          agent workflows that plan, write, test and review code alongside the
+          team.
+        </p>
+        <p>
+          I design and deliver modern Angular applications, mentor teams, and
+          drive technical direction from architecture to execution. I am moving
+          deeper into a frontend architect role, shaping component systems,
+          performance strategy, and long-term maintainability.
+        </p>
       </div>
-    </div>
+    </section>
+
+    <section class="content-card" aria-labelledby="section-specialties">
+      <h2 id="section-specialties">Specialties</h2>
+      <div class="specialties">
+        <ul class="skills">
+          <li class="skill-item">AI engineering and agentic development</li>
+          <li class="skill-item">Latest Angular (standalone APIs, signals)</li>
+          <li class="skill-item">Frontend architecture and governance</li>
+          <li class="skill-item">TypeScript (strict, scalable patterns)</li>
+          <li class="skill-item">Design systems and component libraries</li>
+          <li class="skill-item">Web performance optimization</li>
+          <li class="skill-item">Nx monorepo architecture</li>
+          <li class="skill-item">API integration (REST)</li>
+          <li class="skill-item">Testing: Cypress, Playwright</li>
+          <li class="skill-item">Accessibility (WCAG) and UX quality</li>
+          <li class="skill-item">CI/CD</li>
+          <li class="skill-item">Code reviews and technical leadership</li>
+          <li class="skill-item">Mentoring and team enablement</li>
+          <li class="skill-item">Documentation and standards</li>
+          <li class="skill-item">Agile delivery and collaboration</li>
+          <li class="skill-item">Product and engineering alignment</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="content-card" aria-labelledby="section-contact">
+      <h2 id="section-contact">Contact</h2>
+      <div class="contact">
+        <p>
+          Mail me at
+          <a href="mailto:hello@elmar.dev">hello@elmar.dev</a>, look me up on
+          <a
+            href="https://www.linkedin.com/in/elmarbeckmann/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >LinkedIn</a
+          >
+          and reach out on
+          <a
+            href="https://x.com/elmardotdev"
+            target="_blank"
+            rel="noopener noreferrer"
+            >X</a
+          >.
+        </p>
+      </div>
+    </section>
   </main>
 </div>
-
-@if (crtEnabled && crtState) {
-  <div
-    class="crt-overlay"
-    [ngClass]="'crt-' + crtState"
-    (animationend)="onCrtAnimationEnd($event)"
-  ></div>
-}

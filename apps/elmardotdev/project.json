@@ -14,6 +14,8 @@
         "outputPath": "dist/apps/elmardotdev",
         "index": "apps/elmardotdev/src/index.html",
         "browser": "apps/elmardotdev/src/main.ts",
+        "server": "apps/elmardotdev/src/main.server.ts",
+        "outputMode": "static",
         "polyfills": ["zone.js"],
         "tsConfig": "apps/elmardotdev/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
