@@ -1,24 +1,4 @@
 {
-  "implicitDependencies": {
-    "angular.json": "*",
-    "package.json": {
-      "dependencies": "*",
-      "devDependencies": "*"
-    },
-    "tsconfig.base.json": "*",
-    "tslint.json": "*",
-    ".eslintrc.json": "*",
-    "nx.json": "*"
-  },
-  "projects": {
-    "elmardotdev": {
-      "tags": []
-    },
-    "elmardotdev-e2e": {
-      "tags": [],
-      "implicitDependencies": ["elmardotdev"]
-    }
-  },
   "targetDefaults": {
     "build": {
       "cache": true
@@ -34,5 +14,40 @@
     }
   },
   "useInferencePlugins": false,
-  "defaultBase": "master"
+  "defaultBase": "main",
+  "namedInputs": {
+    "default": ["{projectRoot}/**/*"],
+    "production": [
+      "default",
+      "!{projectRoot}/**/*.spec.ts",
+      "!{projectRoot}/jest.config.js",
+      "!{projectRoot}/tsconfig.spec.json",
+      "!{projectRoot}/eslint.config.mjs"
+    ]
+  },
+  "plugins": [
+    {
+      "plugin": "@nx/jest/plugin",
+      "options": {
+        "targetName": "test"
+      }
+    },
+    {
+      "plugin": "@nx/eslint/plugin",
+      "options": {
+        "targetName": "lint"
+      },
+      "include": ["apps/elmardotdev/**/*", "apps/elmardotdev-e2e/**/*"]
+    },
+    {
+      "plugin": "@nx/cypress/plugin",
+      "options": {
+        "targetName": "e2e",
+        "ciTargetName": "e2e-ci"
+      }
+    }
+  ],
+  "affected": {
+    "legacy": true
+  }
 }

@@ -7,7 +7,7 @@ Follow it when making changes, running commands, or reviewing code.
 
 - Nx workspace with Angular app `elmardotdev`
 - Unit tests: Jest
-- E2E tests: Cypress (legacy `cypress.json` config)
+- E2E tests: Cypress (`cypress.config.ts`)
 - Linting: ESLint (Nx + Angular ESLint)
 - Formatting: Prettier (single quotes)
 
@@ -22,24 +22,23 @@ Follow it when making changes, running commands, or reviewing code.
 
 ## Dev Server
 
-- `ng serve elmardotdev`
+- `nx serve elmardotdev`
 - Default URL: http://localhost:4200
 
 ## Build
 
-- `ng build elmardotdev`
-- Production build: `ng build elmardotdev --prod`
+- Production build (default): `nx build elmardotdev`
+- Development build: `nx build elmardotdev -c development`
 
 ## Lint
 
-- `npm run lint` (runs `nx workspace-lint && ng lint`)
-- App lint only: `ng lint elmardotdev`
+- `npm run lint` (runs `nx run-many -t lint`)
+- App lint only: `nx lint elmardotdev`
 - E2E lint only: `nx lint elmardotdev-e2e`
 
 ## Unit Tests (Jest)
 
-- Run all tests: `ng test elmardotdev`
-- Nx variant: `nx test elmardotdev`
+- Run all tests: `nx test elmardotdev`
 - Single test file (pass-through to Jest):
   - `nx test elmardotdev --testPathPattern=apps/elmardotdev/src/app/app.component.spec.ts`
   - `nx test elmardotdev --testPathPattern=app.component.spec.ts`
@@ -50,17 +49,17 @@ Follow it when making changes, running commands, or reviewing code.
 
 - Run all e2e: `nx e2e elmardotdev-e2e`
 - Run a single spec:
-  - `nx e2e elmardotdev-e2e --spec=apps/elmardotdev-e2e/src/integration/**/*.spec.ts`
+  - `nx e2e elmardotdev-e2e --spec=apps/elmardotdev-e2e/src/e2e/**/*.cy.ts`
 
 ## Affected Commands (Nx)
 
 - `npm run affected:test`
-- `npm run affected:lint`
-- `npm run affected:build`
+- `nx affected -t lint`
+- `nx affected -t build`
 
 ## Formatting
 
-- Format all: `npm run format` or `npm run format:write`
+- Format all: `npm run format:write`
 - Check formatting: `npm run format:check`
 
 ## Code Style Guidelines
@@ -82,7 +81,8 @@ Follow it when making changes, running commands, or reviewing code.
 - Directive selector: attribute, prefix `elmardotdev`, camelCase.
   - Example: `elmardotdevFocus`
 - Keep modules/components/services in their feature folders.
-- Use `styleUrls` and external templates (default setup).
+- Use `styleUrl` and external templates (default setup).
+- Components use `OnPush` change detection (the Angular 22 default).
 
 ### Imports
 
@@ -103,7 +103,7 @@ Follow it when making changes, running commands, or reviewing code.
 ### Templates (HTML)
 
 - Use Angular template syntax with readability in mind.
-- Prefer `*ngIf`/`*ngFor` with `trackBy` for lists.
+- Use built-in control flow (`@if`, `@for` with `track`).
 - Avoid complex logic in templates; move to component TS.
 
 ### Styles (SCSS)
@@ -128,21 +128,20 @@ Follow it when making changes, running commands, or reviewing code.
 
 - Nx module boundary enforcement is enabled.
 - Angular ESLint enforces selector prefixes and styles.
-- Cypress config disables `no-var-requires` in plugins file.
 
 ## Files to Check for Rules
 
-- ESLint root: `.eslintrc.json`
-- App ESLint: `apps/elmardotdev/.eslintrc.json`
-- E2E ESLint: `apps/elmardotdev-e2e/.eslintrc.json`
+- ESLint root: `eslint.config.mjs`
+- App ESLint: `apps/elmardotdev/eslint.config.mjs`
+- E2E ESLint: `apps/elmardotdev-e2e/eslint.config.mjs`
 - Prettier: `.prettierrc`
 - Nx settings: `nx.json`
-- Angular targets: `angular.json`
+- Project targets: `apps/elmardotdev/project.json`, `apps/elmardotdev-e2e/project.json`
 
 ## Notes for Agents
 
-- Prefer `nx` / `ng` commands so targets resolve correctly.
-- Keep workspace defaults in mind (`defaultBase` is `master`).
+- Use `nx` commands. The `ng` CLI does not work because there is no `angular.json`.
+- `defaultBase` is `main`.
 - Do not modify build/test scripts without justification.
 - If adding new files, follow existing folder structure.
 

@@ -11,7 +11,9 @@
   background: $bg;
   color: $text;
 
-  h1 { font-weight: 700; }
+  h1 {
+    font-weight: 700;
+  }
 
   h2 {
     font-family: 'Kalam', sans-serif;
@@ -29,7 +31,9 @@
 
   a {
     color: $accent;
-    &:hover { text-decoration: underline; }
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   .content-card {
@@ -55,7 +59,8 @@
     border: 1px solid rgba(#fff, 0.15);
     color: $text-l;
 
-    &:hover, &.open {
+    &:hover,
+    &.open {
       background: rgba(#fff, 0.12);
       border-color: rgba(#fff, 0.25);
       color: $text;

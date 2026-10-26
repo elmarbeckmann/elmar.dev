@@ -45,7 +45,9 @@
     font-weight: 700;
     text-decoration: underline 3px $accent;
     text-underline-offset: 4px;
-    &:hover { color: $accent; }
+    &:hover {
+      color: $accent;
+    }
   }
 
   .content-card {
@@ -82,9 +84,15 @@
     border-radius: 0;
     box-shadow: 3px 3px 0 $black;
 
-    &:nth-child(3n+1) { border-left: 5px solid $accent; }
-    &:nth-child(3n+2) { border-left: 5px solid $green; }
-    &:nth-child(3n+3) { border-left: 5px solid $blue; }
+    &:nth-child(3n + 1) {
+      border-left: 5px solid $accent;
+    }
+    &:nth-child(3n + 2) {
+      border-left: 5px solid $green;
+    }
+    &:nth-child(3n + 3) {
+      border-left: 5px solid $blue;
+    }
 
     &:hover {
       transform: translate(-2px, -2px);
@@ -100,7 +108,8 @@
     border-radius: 0;
     box-shadow: 3px 3px 0 $black;
 
-    &:hover, &.open {
+    &:hover,
+    &.open {
       transform: translate(-1px, -1px);
       box-shadow: 4px 4px 0 $black;
     }
